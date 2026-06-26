@@ -104,16 +104,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.03),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      )
+                    ],
+                    border: Border.all(color: Colors.grey.shade100),
                   ),
                   child: const Row(
                     children: [
-                      Icon(Icons.search, color: Colors.grey),
-                      SizedBox(width: 8),
+                      Icon(Icons.search_rounded, color: Colors.indigo),
+                      SizedBox(width: 12),
                       Text(
                         'Search services or vendors...',
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -136,6 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      letterSpacing: -0.5,
                     ),
                   ),
                   TextButton(
@@ -145,7 +154,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(builder: (context) => const ServicesScreen()),
                       );
                     },
-                    child: const Text('See All'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.indigo,
+                    ),
+                    child: const Text('See All', style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -164,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisCount: 3,
                       mainAxisSpacing: 12,
                       crossAxisSpacing: 12,
-                      childAspectRatio: 1,
+                      childAspectRatio: 1.05,
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
@@ -185,12 +197,13 @@ class _HomeScreenState extends State<HomeScreen> {
           // Popular Services Section
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0),
               child: Text(
                 'Popular Services',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: -0.5,
                 ),
               ),
             ),
@@ -223,12 +236,13 @@ class _HomeScreenState extends State<HomeScreen> {
           // Nearby Vendors Section
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Text(
                 'Nearby Vendors',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: -0.5,
                 ),
               ),
             ),
@@ -277,14 +291,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategoryCard(String category, BuildContext context) {
     final icons = {
-      'Home Services': Icons.home_repair_service,
-      'Personal Care': Icons.spa,
-      'Cleaning': Icons.cleaning_services,
-      'Repairs': Icons.handyman,
-      'Automotive': Icons.local_car_wash,
-      'Beauty': Icons.face,
-      'Wellness': Icons.self_improvement,
-      'Other': Icons.more_horiz,
+      'Home Services': Icons.home_repair_service_rounded,
+      'Personal Care': Icons.spa_rounded,
+      'Cleaning': Icons.cleaning_services_rounded,
+      'Repairs': Icons.handyman_rounded,
+      'Automotive': Icons.local_car_wash_rounded,
+      'Beauty': Icons.face_rounded,
+      'Wellness': Icons.self_improvement_rounded,
+      'Other': Icons.more_horiz_rounded,
     };
 
     return GestureDetector(
@@ -298,16 +312,17 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.indigo.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
+          color: Colors.indigo.withOpacity(0.06),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.indigo.withOpacity(0.03)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              icons[category] ?? Icons.category,
+              icons[category] ?? Icons.category_rounded,
               color: Colors.indigo,
-              size: 32,
+              size: 28,
             ),
             const SizedBox(height: 8),
             Text(
@@ -315,7 +330,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 12,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -0.2,
               ),
             ),
           ],
@@ -326,63 +342,87 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildServiceCard(dynamic service, BuildContext context) {
     final serviceIcons = {
-      'plumbing': Icons.plumbing,
-      'electrical': Icons.electrical_services,
-      'carpentry': Icons.handyman,
-      'painting': Icons.format_paint,
-      'ac': Icons.ac_unit,
-      'pest': Icons.pest_control,
-      'cleaning': Icons.cleaning_services,
-      'deep-clean': Icons.wash,
-      'sofa': Icons.chair,
-      'carpet': Icons.carpet,
-      'shoe': Icons.directions_walk,
-      'laundry': Icons.local_laundry_service,
-      'window': Icons.window,
-      'massage': Icons.spa,
-      'hair': Icons.content_cut,
-      'nail': Icons.touch_app,
-      'makeup': Icons.face,
-      'fitness': Icons.fitness_center,
-      'yoga': Icons.self_improvement,
-      'car-wash': Icons.local_car_wash,
-      'detailing': Icons.auto_awesome,
-      'mechanic': Icons.build,
-      'tire': Icons.circle,
-      'battery': Icons.battery_charging_full,
-      'appliance': Icons.kitchen,
-      'mobile': Icons.smartphone,
-      'computer': Icons.computer,
-      'tv': Icons.tv,
-      'water': Icons.water_drop,
-      'ac-repair': Icons.ac_unit,
-      'spa': Icons.hot_tub,
-      'facial': Icons.face_retouching_natural,
-      'body': Icons.accessibility,
-      'meditation': Icons.self_improvement,
-      'moving': Icons.local_shipping,
-      'garden': Icons.yard,
-      'pet': Icons.pets,
-      'event': Icons.celebration,
-      'camera': Icons.camera_alt,
-      'tutor': Icons.school,
-      'driver': Icons.drive_eta,
+      'plumbing': Icons.plumbing_rounded,
+      'electrical': Icons.electrical_services_rounded,
+      'carpentry': Icons.handyman_rounded,
+      'painting': Icons.format_paint_rounded,
+      'ac': Icons.ac_unit_rounded,
+      'pest': Icons.pest_control_rounded,
+      'cleaning': Icons.cleaning_services_rounded,
+      'deep-clean': Icons.wash_rounded,
+      'sofa': Icons.chair_rounded,
+      'carpet': Icons.border_outer_rounded,
+      'shoe': Icons.directions_walk_rounded,
+      'laundry': Icons.local_laundry_service_rounded,
+      'window': Icons.window_rounded,
+      'massage': Icons.spa_rounded,
+      'hair': Icons.content_cut_rounded,
+      'nail': Icons.fingerprint_rounded,
+      'makeup': Icons.face_rounded,
+      'fitness': Icons.fitness_center_rounded,
+      'yoga': Icons.self_improvement_rounded,
+      'car-wash': Icons.local_car_wash_rounded,
+      'detailing': Icons.auto_awesome_rounded,
+      'mechanic': Icons.build_rounded,
+      'tire': Icons.circle_outlined,
+      'battery': Icons.battery_charging_full_rounded,
+      'appliance': Icons.kitchen_rounded,
+      'mobile': Icons.smartphone_rounded,
+      'computer': Icons.computer_rounded,
+      'tv': Icons.tv_rounded,
+      'water': Icons.water_drop_rounded,
+      'ac-repair': Icons.ac_unit_rounded,
+      'spa': Icons.hot_tub_rounded,
+      'facial': Icons.face_retouching_natural_rounded,
+      'body': Icons.accessibility_rounded,
+      'meditation': Icons.self_improvement_rounded,
+      'moving': Icons.local_shipping_rounded,
+      'garden': Icons.yard_rounded,
+      'pet': Icons.pets_rounded,
+      'event': Icons.celebration_rounded,
+      'camera': Icons.camera_alt_rounded,
+      'tutor': Icons.school_rounded,
+      'driver': Icons.drive_eta_rounded,
     };
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      elevation: 2,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.indigo.withOpacity(0.1),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        leading: Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: Colors.indigo.withOpacity(0.06),
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: Icon(
-            serviceIcons[service.icon] ?? Icons.design_services,
+            serviceIcons[service.icon] ?? Icons.design_services_rounded,
             color: Colors.indigo,
+            size: 24,
           ),
         ),
-        title: Text(service.name),
-        subtitle: Text(service.category, style: const TextStyle(fontSize: 12)),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        title: Text(
+          service.name,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        subtitle: Text(
+          service.category,
+          style: TextStyle(fontSize: 12, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
+        ),
+        trailing: Container(
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(Icons.arrow_forward_ios, size: 12, color: Colors.grey),
+        ),
         onTap: () {
           context.read<VendorBloc>().add(LoadVendors(serviceId: service.id));
           Navigator.push(
@@ -399,35 +439,80 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildVendorCard(dynamic vendor, BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      elevation: 2,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.green.withOpacity(0.1),
-          child: const Icon(Icons.store, color: Colors.green),
-        ),
-        title: Text(vendor.businessName),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
           children: [
-            Text(vendor.address?['city'] ?? 'Location unavailable'),
-            Row(
-              children: [
-                const Icon(Icons.star, size: 14, color: Colors.amber),
-                Text(' ${vendor.rating.toStringAsFixed(1)} (${vendor.totalReviews})'),
-              ],
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: Colors.green.withOpacity(0.06),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Icon(Icons.storefront_rounded, color: Colors.green, size: 28),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    vendor.businessName,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -0.3,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    vendor.address?['city'] ?? 'Location unavailable',
+                    style: TextStyle(color: Colors.grey.shade600, fontSize: 13, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      const Icon(Icons.star_rounded, size: 18, color: Colors.amber),
+                      Text(
+                        ' ${vendor.rating.toStringAsFixed(1)} ',
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                      Text(
+                        '(${vendor.totalReviews})',
+                        style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VendorDetailsScreen(vendorId: vendor.id),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.indigo,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              ),
+              child: const Text('Book', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
-        ),
-        trailing: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VendorDetailsScreen(vendorId: vendor.id),
-              ),
-            );
-          },
-          child: const Text('Book'),
         ),
       ),
     );
